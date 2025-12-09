@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZAKAPPS - Nourish Yourself with MISO Goodness</title>
+
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+    
+    <div class="top-bar">
+        <div>
+            <select>
+                <option>IND</option>
+                <option>EUR</option>
+                <option>USD</option>
+            </select>
+            <span style="margin-left: 20px;">📍 Stores</span>
+        </div>
+        <div>Login / Register</div>
+    </div>
+
+    <header>
+        <div class="logo">
+            <div class="logo-icon">🍜</div>
+            <span>ZAKAPPS SHOP</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="showPage('home')">Shop</a></li>
+                <li><a href="#">Our story</a></li>
+                <li><a href="#">Recipes</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <span>🔍</span>
+            <span>❤️</span>
+            <div class="cart-icon">
+                <span>🛒</span>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+    </header>
+
+    <div id="homePage">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Nourish Yourself with <span class="highlight">MISO Goodness</span></h1>
+                <p style="margin: 20px 0;">Free shipping within the INDIA for orders of ₹2000 or more</p>
+                <button class="shop-btn" onclick="showPage('products')">Shop now</button>
+            </div>
+            <div class="hero-images">
+                <div class="hero-image" onclick="showPage('products')">🥣 Sweet Miso</div>
+                <div class="hero-image" onclick="showPage('products')">🌶️ Spicy Miso</div>
+                <div class="hero-image" onclick="showPage('products')">🍵 Matcha</div>
+                <div class="hero-image" onclick="showPage('products')">🍜 Classic Miso</div>
+            </div>
+        </section>
+
+        <div class="features">
+            <div class="feature-item">
+                <span>✓</span>
+                <span>Vegan</span>
+            </div>
+            <div class="feature-item">
+                <span>✓</span>
+                <span>KETO-friendly</span>
+            </div>
+            <div class="feature-item">
+                <span>✓</span>
+                <span>Non-GMO</span>
+            </div>
+            <div class="feature-item">
+                <span>✓</span>
+                <span>Organic miso</span>
+            </div>
+            <div class="feature-item">
+                <span>✓</span>
+                <span>Gluten-Free</span>
+            </div>
+        </div>
+
+        <section class="product-section">
+            <div class="section-header">
+                <h2>Best Sellers</h2>
+            </div>
+            <div class="product-grid" id="homeProducts"></div>
+        </section>
+    </div>
+
+    <div id="productsPage" class="hidden">
+        <section class="product-section">
+            <div class="section-header">
+                <h2>Our Products</h2>
+            </div>
+
+            <div class="filter-sort-bar">
+                <div class="filter-group">
+                    <label>Filter:</label>
+                    <div class="filter-options">
+                        <div class="filter-option">
+                            <input type="checkbox" id="rating5" onchange="applyFilters()">
+                            <label for="rating5">5 Stars</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="rating4" onchange="applyFilters()">
+                            <label for="rating4">4+ Stars</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="vegan" onchange="applyFilters()">
+                            <label for="vegan">Vegan</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="organic" onchange="applyFilters()">
+                            <label for="organic">Organic</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="sort-group">
+                    <label>Sort By:</label>
+                    <select id="sortSelect" onchange="applySort()">
+                        <option value="default">Default</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Rating</option>
+                        <option value="name">Name</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="product-grid" id="productsGrid"></div>
+        </section>
+    </div>
+
+    <div id="productDetailPage" class="hidden">
+        <section class="product-detail">
+            <div class="product-detail-image" id="detailImage"></div>
+            <div class="product-detail-info">
+                <h1 id="detailName"></h1>
+                <div class="product-rating" id="detailRating"></div>
+                <div class="price" id="detailPrice"></div>
+                <p class="product-description" id="detailDescription"></p>
+                
+                <div class="quantity-selector">
+                    <label>Quantity:</label>
+                    <button class="qty-btn" onclick="changeQuantity(-1)">-</button>
+                    <span class="qty-display" id="quantity">1</span>
+                    <button class="qty-btn" onclick="changeQuantity(1)">+</button>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="addToCart()">Add to Cart</button>
+                    <button class="btn-secondary" onclick="buyNow()">Buy Now</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="orderSuccessPage" class="hidden">
+        <section class="order-success">
+            <h1>✓ Order Placed Successfully!</h1>
+            <p>Thank you for your purchase. Your order has been confirmed.</p>
+            <button class="shop-btn" onclick="showPage('home')">Continue Shopping</button>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>LINKS</h3>
+                <a href="#">About us</a>
+                <a href="#">Contact us</a>
+                <a href="#">Customer Service</a>
+                <a href="#">FAQs</a>
+            </div>
+            <div class="footer-section">
+                <h3>INFORMATION</h3>
+                <a href="#">Terms of Service</a>
+                <a href="#">Refund policy</a>
+                <a href="#">Press</a>
+            </div>
+        </div>
+        <div class="social-icons">
+            <div class="social-icon">f</div>
+            <div class="social-icon">t</div>
+            <div class="social-icon">in</div>
+            <div class="social-icon">p</div>
+        </div>
+        <p style="margin-top: 20px; text-align: center;">© 1975 ZAKAPPS.</p>
+    </footer>
+    <script src="index.js"></script>
+
+</body>
+</html>
